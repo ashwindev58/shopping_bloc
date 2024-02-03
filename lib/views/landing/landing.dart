@@ -8,225 +8,304 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Responsive UI Example',
+      title: 'E-Commerce App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        fontFamily: 'Roboto',
+        fontFamily: 'Roboto', // You may need to import your custom font
       ),
-      home: ResponsiveUI(),
+      home: MyHomePage(),
     );
   }
 }
 
-class ResponsiveUI extends StatelessWidget {
+class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Responsive UI'),
+        title: Text(
+          'E-Commerce App',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {},
+          ),
+          IconButton(
+            icon: Icon(Icons.shopping_cart),
+            onPressed: () {},
+          ),
+        ],
       ),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          if (constraints.maxWidth > 600) {
-            return WideLayout();
-          } else {
-            return NarrowLayout();
-          }
-        },
-      ),
-    );
-  }
-}
-
-class WideLayout extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 2,
-            child: Container(
-              padding: EdgeInsets.all(20),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              height: 200,
               decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(20),
+                image: DecorationImage(
+                  image: AssetImage('assets/hero_image.jpg'),
+                  fit: BoxFit.cover,
+                ),
               ),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Discover the Latest Trends',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 10),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text('Shop Now'),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.orange,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Welcome to Our App',
+                    'Featured Categories',
                     style: TextStyle(
-                      fontSize: 28,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Text(
-                    'Discover the future of shopping with our cutting-edge e-commerce app.',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white70,
+                  SizedBox(height: 10),
+                  Container(
+                    height: 120,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        buildCategoryCard('Electronics', Icons.phone_android, Colors.blue),
+                        buildCategoryCard('Fashion', Icons.accessibility, Colors.green),
+                        buildCategoryCard('Home', Icons.home, Colors.orange),
+                        buildCategoryCard('Beauty', Icons.face, Colors.pink),
+                      ],
                     ),
                   ),
                 ],
               ),
             ),
-          ),
-          SizedBox(width: 16),
-          Expanded(
-            flex: 3,
-            child: Container(
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      // Handle button press
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.blue,
-                      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
+            SizedBox(height: 20),
+            Container(
+              height: 200,
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                elevation: 5,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    image: DecorationImage(
+                      image: AssetImage('assets/offers_banner.jpg'),
+                      fit: BoxFit.cover,
                     ),
+                  ),
+                  child: Center(
                     child: Text(
-                      'Get Started',
+                      'Limited Time Offers',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 18,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      FeatureTile(icon: Icons.shopping_cart, title: 'Shop Anytime, Anywhere'),
-                      FeatureTile(icon: Icons.star, title: 'Exclusive Deals'),
-                      FeatureTile(icon: Icons.bike_scooter, title: 'Speedy Delivery'),
-                    ],
+                ),
+              ),
+            ),
+            SizedBox(height: 20),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Product Showcase',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    height: 250,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        buildProductCard('Product 1', 'Description 1', 'assets/product1.jpg'),
+                        buildProductCard('Product 2', 'Description 2', 'assets/product2.jpg'),
+                        buildProductCard('Product 3', 'Description 3', 'assets/product3.jpg'),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-          ),
-        ],
+            SizedBox(height: 20),
+            Container(
+              padding: EdgeInsets.all(16),
+              color: Colors.grey[200],
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Testimonials',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  // Add your testimonials section
+                ],
+              ),
+            ),
+            SizedBox(height: 20),
+            Container(
+              padding: EdgeInsets.all(16),
+              color: Colors.blue,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Contact us: info@example.com',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                    ),
+                  ),
+                  // Add your social media icons here
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
-}
 
-class NarrowLayout extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            padding: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.circular(20),
-            ),
+  Widget buildCategoryCard(String title, IconData icon, Color color) {
+    return Container(
+      width: 120,
+      margin: EdgeInsets.only(right: 16),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        elevation: 3,
+        child: InkWell(
+          onTap: () {},
+          borderRadius: BorderRadius.circular(15),
+          child: Padding(
+            padding: EdgeInsets.all(16),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  'Welcome to Our App',
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
+                Icon(
+                  icon,
+                  color: color,
+                  size: 30,
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 10),
                 Text(
-                  'Discover the future of shopping with our cutting-edge e-commerce app.',
+                  title,
                   style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white70,
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
                   ),
                   textAlign: TextAlign.center,
                 ),
               ],
             ),
           ),
-          SizedBox(height: 20),
-          Container(
-            padding: EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    // Handle button press
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.blue,
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                  ),
-                  child: Text(
-                    'Get Started',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 20),
-                FeatureTile(icon: Icons.shopping_cart, title: 'Shop Anytime, Anywhere'),
-                FeatureTile(icon: Icons.star, title: 'Exclusive Deals'),
-                FeatureTile(icon: Icons.bike_scooter, title: 'Speedy Delivery'),
-              ],
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
-}
 
-class FeatureTile extends StatelessWidget {
-  final IconData icon;
-  final String title;
-
-  FeatureTile({required this.icon, required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(icon, size: 40, color: Colors.blue),
-      title: Text(
-        title,
-        style: TextStyle(fontSize: 16),
+  Widget buildProductCard(String name, String description, String imageAsset) {
+    return Container(
+      width: 200,
+      margin: EdgeInsets.only(right: 16),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        elevation: 3,
+        child: InkWell(
+          onTap: () {},
+          borderRadius: BorderRadius.circular(15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                height: 150,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+                  image: DecorationImage(
+                    image: AssetImage(imageAsset),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      description,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
-      contentPadding: EdgeInsets.symmetric(vertical: 8),
     );
   }
 }
