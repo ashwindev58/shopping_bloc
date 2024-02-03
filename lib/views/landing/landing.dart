@@ -5,7 +5,9 @@ import 'package:shopping_bloc/views/homeviews/homescreens.dart';
 
 
 
-class ResponsiveUI extends StatelessWidget {
+class LandingPage extends StatelessWidget {
+  const LandingPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,11 +24,7 @@ class ResponsiveUI extends StatelessWidget {
           filter:  ImageFilter.blur(sigmaX: 7.0, sigmaY: 7.0),
           child: LayoutBuilder(
             builder: (context, constraints) {
-              if (constraints.maxWidth > 600) {
-                return NarrowLayout();
-              } else {
-                return NarrowLayout();
-              }
+             return const NarrowLayout();
             },
           ),
         ),
@@ -36,6 +34,8 @@ class ResponsiveUI extends StatelessWidget {
 }
 
 class WideLayout extends StatelessWidget {
+  const WideLayout({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -132,6 +132,8 @@ class WideLayout extends StatelessWidget {
 }
 
 class NarrowLayout extends StatelessWidget {
+  const NarrowLayout({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -173,7 +175,7 @@ class NarrowLayout extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           Container(
-            padding:  EdgeInsets.all(20),
+            padding:  const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.grey.shade200.withOpacity(0.85),
               borderRadius: BorderRadius.circular(20),
@@ -225,7 +227,7 @@ class FeatureTile extends StatelessWidget {
   final IconData icon;
   final String title;
 
-  FeatureTile({required this.icon, required this.title});
+  FeatureTile({super.key, required this.icon, required this.title});
 
   @override
   Widget build(BuildContext context) {
