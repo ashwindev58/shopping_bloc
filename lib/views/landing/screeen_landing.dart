@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class ScreenLanding extends StatelessWidget {
-  bool inputTextNotNull = true;
+  final bool inputTextNotNull = true;
 
   ScreenLanding({super.key});
 
