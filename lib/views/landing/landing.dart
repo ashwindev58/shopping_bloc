@@ -1,39 +1,35 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:shopping_bloc/views/homeviews/homescreens.dart';
 
-void main() {
-  runApp(MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Responsive UI Example',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        fontFamily: 'Roboto',
-      ),
-      home: ResponsiveUI(),
-    );
-  }
-}
 
 class ResponsiveUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Responsive UI'),
-      ),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          if (constraints.maxWidth > 600) {
-            return NarrowLayout();
-          } else {
-            return NarrowLayout();
-          }
-        },
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+       decoration:const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('images/market.jpg'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+        child: BackdropFilter(
+          filter:  ImageFilter.blur(sigmaX: 7.0, sigmaY: 7.0),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth > 600) {
+                return NarrowLayout();
+              } else {
+                return NarrowLayout();
+              }
+            },
+          ),
+        ),
       ),
     );
   }
@@ -138,7 +134,7 @@ class WideLayout extends StatelessWidget {
 class NarrowLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
       padding: const EdgeInsets.all(16.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -147,10 +143,10 @@ class NarrowLayout extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: const Color.fromARGB(218, 202, 212, 218).withOpacity(0.5),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: const Column(
+            child:  const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -158,16 +154,17 @@ class NarrowLayout extends StatelessWidget {
                   'Welcome to Our App',
                   style: TextStyle(
                     fontSize: 28,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w900,
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 15),
                 Text(
                   'Discover the future of shopping with our cutting-edge e-commerce app.',
                   style: TextStyle(
                     fontSize: 18,
-                    color: Colors.white70,
+                    // fontWeight: FontWeight.w600,
+                    color: Colors.white,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -176,9 +173,9 @@ class NarrowLayout extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           Container(
-            padding: const EdgeInsets.all(20),
+            padding:  EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Colors.grey[200],
+              color: Colors.grey.shade200.withOpacity(0.85),
               borderRadius: BorderRadius.circular(20),
             ),
             child: Column(
@@ -236,7 +233,7 @@ class FeatureTile extends StatelessWidget {
       leading: Icon(icon, size: 40, color: Colors.blue),
       title: Text(
         title,
-        style: const TextStyle(fontSize: 16),
+        style: const TextStyle(fontSize: 16,fontWeight: FontWeight.w500),
       ),
       contentPadding: const EdgeInsets.symmetric(vertical: 8),
     );

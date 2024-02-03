@@ -31,7 +31,7 @@ class MyHomePage extends StatelessWidget {
               height: 200,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/hero_image.jpg'),
+                  image: AssetImage('images/market.jpg'),
                   fit: BoxFit.cover,
                 ),
               ),
