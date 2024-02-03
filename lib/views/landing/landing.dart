@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_bloc/views/homeviews/homescreens.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,12 +24,12 @@ class ResponsiveUI extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Responsive UI'),
+        title: const Text('Responsive UI'),
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
           if (constraints.maxWidth > 600) {
-            return WideLayout();
+            return NarrowLayout();
           } else {
             return NarrowLayout();
           }
@@ -50,12 +51,12 @@ class WideLayout extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: Colors.blue,
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Column(
+              child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -79,11 +80,11 @@ class WideLayout extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: 16),
+          const SizedBox(width: 16),
           Expanded(
             flex: 3,
             child: Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: Colors.grey[200],
                 borderRadius: BorderRadius.circular(20),
@@ -97,12 +98,13 @@ class WideLayout extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       primary: Colors.blue,
-                      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 15, horizontal: 30),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       'Get Started',
                       style: TextStyle(
                         color: Colors.white,
@@ -111,13 +113,16 @@ class WideLayout extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      FeatureTile(icon: Icons.shopping_cart, title: 'Shop Anytime, Anywhere'),
+                      FeatureTile(
+                          icon: Icons.shopping_cart,
+                          title: 'Shop Anytime, Anywhere'),
                       FeatureTile(icon: Icons.star, title: 'Exclusive Deals'),
-                      FeatureTile(icon: Icons.bike_scooter, title: 'Speedy Delivery'),
+                      FeatureTile(
+                          icon: Icons.bike_scooter, title: 'Speedy Delivery'),
                     ],
                   ),
                 ],
@@ -140,12 +145,12 @@ class NarrowLayout extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.blue,
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Column(
+            child: const Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -169,9 +174,9 @@ class NarrowLayout extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: Colors.grey[200],
               borderRadius: BorderRadius.circular(20),
@@ -181,16 +186,22 @@ class NarrowLayout extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => MyHomePage(),
+                      ),
+                    );
                     // Handle button press
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.blue,
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+                    backgroundColor: Colors.blue,
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 30),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Get Started',
                     style: TextStyle(
                       color: Colors.white,
@@ -199,8 +210,9 @@ class NarrowLayout extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
-                FeatureTile(icon: Icons.shopping_cart, title: 'Shop Anytime, Anywhere'),
+                const SizedBox(height: 20),
+                FeatureTile(
+                    icon: Icons.shopping_cart, title: 'Shop Anytime, Anywhere'),
                 FeatureTile(icon: Icons.star, title: 'Exclusive Deals'),
                 FeatureTile(icon: Icons.bike_scooter, title: 'Speedy Delivery'),
               ],
@@ -224,9 +236,9 @@ class FeatureTile extends StatelessWidget {
       leading: Icon(icon, size: 40, color: Colors.blue),
       title: Text(
         title,
-        style: TextStyle(fontSize: 16),
+        style: const TextStyle(fontSize: 16),
       ),
-      contentPadding: EdgeInsets.symmetric(vertical: 8),
+      contentPadding: const EdgeInsets.symmetric(vertical: 8),
     );
   }
 }
