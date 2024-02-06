@@ -1,7 +1,8 @@
 // product_bloc.dart
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bloc/bloc.dart';
 import 'package:http/http.dart' as http;
-import 'package:shopping_bloc/application/product/productrepo.dart';
+
+import 'productrepo.dart';
 
 // Events
 abstract class ProductEvent {}
@@ -27,23 +28,18 @@ class ErrorState extends ProductState {
 
 // BLoC
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
-  final ProductRepository _repository = ProductRepository();
+  final ProductRepository _repository;
 
-  ProductBloc(super.initialState);
+  ProductBloc(this._repository) : super(LoadingState()) {
+    on<FetchProductsEvent>(_handleFetchProductsEvent);
+  }
 
-  @override
-  ProductState get initialState => LoadingState();
-
-  @override
-  Stream<ProductState> mapEventToState(ProductEvent event) async* {
-    if (event is FetchProductsEvent) {
-      yield LoadingState();
-      try {
-        final categories = await _repository.fetchCategories();
-        yield LoadedState(categories);
-      } catch (e) {
-        yield ErrorState('Failed to load categories');
-      }
+  Future<void> _handleFetchProductsEvent(FetchProductsEvent event, Emitter<ProductState> emit) async {
+    try {
+      final categories = await _repository.fetchCategories();
+      emit(LoadedState(categories));
+    } catch (e) {
+      emit(ErrorState('Failed to load categories'));
     }
   }
 }

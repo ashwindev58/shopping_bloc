@@ -65,7 +65,7 @@ class ProductCard extends StatelessWidget {
                         // Add to Cart functionality
                       },
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.blue,
+                        backgroundColor: Colors.blue,
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                       ),
                       child: const Icon(Icons.shopping_cart),
