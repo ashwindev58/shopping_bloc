@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopping_bloc/application/bloc/category_bloc_bloc.dart';
 
 import 'views/landing/landing.dart';
-import 'views/product_list/common_product_lis.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: MaterialApp(
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => CategoryBlocBloc(),
+          ),
+          
+        ],
+        child: MaterialApp(
         title: 'Flutter Demo',debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
@@ -23,6 +31,7 @@ class MyApp extends StatelessWidget {
         // home:  ProductSearchScreen(),
         home:  const LandingPage(),
       ),
+      )
     );
   }
 }
