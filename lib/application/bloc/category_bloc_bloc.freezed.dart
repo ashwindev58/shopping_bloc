@@ -172,7 +172,7 @@ abstract class _Started implements CategoryBlocEvent {
 
 /// @nodoc
 mixin _$CategoryBlocState {
-  String get message => throw _privateConstructorUsedError;
+  List<dynamic> get listCate => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -186,7 +186,7 @@ abstract class $CategoryBlocStateCopyWith<$Res> {
           CategoryBlocState value, $Res Function(CategoryBlocState) then) =
       _$CategoryBlocStateCopyWithImpl<$Res, CategoryBlocState>;
   @useResult
-  $Res call({String message, bool isLoading});
+  $Res call({List<dynamic> listCate, bool isLoading});
 }
 
 /// @nodoc
@@ -202,14 +202,14 @@ class _$CategoryBlocStateCopyWithImpl<$Res, $Val extends CategoryBlocState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? message = null,
+    Object? listCate = null,
     Object? isLoading = null,
   }) {
     return _then(_value.copyWith(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
+      listCate: null == listCate
+          ? _value.listCate
+          : listCate // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -226,7 +226,7 @@ abstract class _$$Category_bloc_stateImplCopyWith<$Res>
       __$$Category_bloc_stateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String message, bool isLoading});
+  $Res call({List<dynamic> listCate, bool isLoading});
 }
 
 /// @nodoc
@@ -240,14 +240,14 @@ class __$$Category_bloc_stateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? message = null,
+    Object? listCate = null,
     Object? isLoading = null,
   }) {
     return _then(_$Category_bloc_stateImpl(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
+      listCate: null == listCate
+          ? _value._listCate
+          : listCate // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
       isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
@@ -262,16 +262,23 @@ class _$Category_bloc_stateImpl
     with DiagnosticableTreeMixin
     implements _Category_bloc_state {
   const _$Category_bloc_stateImpl(
-      {required this.message, required this.isLoading});
+      {required final List<dynamic> listCate, required this.isLoading})
+      : _listCate = listCate;
 
+  final List<dynamic> _listCate;
   @override
-  final String message;
+  List<dynamic> get listCate {
+    if (_listCate is EqualUnmodifiableListView) return _listCate;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_listCate);
+  }
+
   @override
   final bool isLoading;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CategoryBlocState(message: $message, isLoading: $isLoading)';
+    return 'CategoryBlocState(listCate: $listCate, isLoading: $isLoading)';
   }
 
   @override
@@ -279,7 +286,7 @@ class _$Category_bloc_stateImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'CategoryBlocState'))
-      ..add(DiagnosticsProperty('message', message))
+      ..add(DiagnosticsProperty('listCate', listCate))
       ..add(DiagnosticsProperty('isLoading', isLoading));
   }
 
@@ -288,13 +295,14 @@ class _$Category_bloc_stateImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$Category_bloc_stateImpl &&
-            (identical(other.message, message) || other.message == message) &&
+            const DeepCollectionEquality().equals(other._listCate, _listCate) &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message, isLoading);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_listCate), isLoading);
 
   @JsonKey(ignore: true)
   @override
@@ -306,11 +314,11 @@ class _$Category_bloc_stateImpl
 
 abstract class _Category_bloc_state implements CategoryBlocState {
   const factory _Category_bloc_state(
-      {required final String message,
+      {required final List<dynamic> listCate,
       required final bool isLoading}) = _$Category_bloc_stateImpl;
 
   @override
-  String get message;
+  List<dynamic> get listCate;
   @override
   bool get isLoading;
   @override

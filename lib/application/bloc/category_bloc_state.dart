@@ -4,11 +4,12 @@ part of 'category_bloc_bloc.dart';
 class CategoryBlocState with _$CategoryBlocState {
 
   const factory CategoryBlocState({
-    required String message,
+    required List listCate,
     required bool isLoading,
   })=_Category_bloc_state;
 
    factory CategoryBlocState.initial(){
-    return CategoryBlocState(message: "initaial", isLoading: true);
+    // ignore: prefer_const_constructors
+    return CategoryBlocState(listCate: [], isLoading: true);
   }
 }

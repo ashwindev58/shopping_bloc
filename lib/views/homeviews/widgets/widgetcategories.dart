@@ -1,11 +1,15 @@
+import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:shopping_bloc/style/colors.dart';
 
 import 'widgetcategrycard.dart';
 
 class WidgetCategories extends StatelessWidget {
+  final List catList;
   const WidgetCategories({
     super.key,
+    required this.catList,
   });
 
   @override
@@ -15,6 +19,7 @@ class WidgetCategories extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+
           const Text(
             'Featured Categories',
             style: TextStyle(
@@ -26,15 +31,29 @@ class WidgetCategories extends StatelessWidget {
           const SizedBox(height: 10),
           SizedBox(
             height: 120,
-            child: ListView(
+            child: 
+            catList.isEmpty?
+            
+             ListView(
               scrollDirection: Axis.horizontal,
               children: [
-                          buildCategoryCard(
-                              'Electronics', Icons.phone_android, Colors.blue),
-                          buildCategoryCard(
-                              'Fashion', Icons.accessibility, Colors.green),
-                          buildCategoryCard('Home', Icons.home, Colors.orange),
-                          buildCategoryCard('Beauty', Icons.face, Colors.pink),
+                
+                for (int i = 0; i < 5; i++)
+                  shimmerCategoryCard()
+              ],
+            )
+            
+            :
+            ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                
+                for (int i = 0; i < catList.length; i++)
+                  buildCategoryCard(
+                    catList[i],
+                    Icons.phone_android,
+                    listColor[Random(i).nextInt(listColor.length)],
+                  ),
               ],
             ),
           ),

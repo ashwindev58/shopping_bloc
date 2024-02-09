@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_bloc/application/bloc/category_bloc_bloc.dart';
+import 'dart:developer';
 
 import 'widgets/discoverwidget.dart';
 import 'widgets/product_row.dart';
@@ -35,8 +36,10 @@ class MyHomePage extends StatelessWidget {
               const SizedBox(height: 20),
                BlocBuilder<CategoryBlocBloc, CategoryBlocState>(
                 builder: (context, state) {
-                  print(state.message);
-                  return const WidgetCategories();
+                  log(state.listCate.toString());
+                  
+                 return
+                    WidgetCategories(catList: state.listCate,);
                 },
               ),
               const SizedBox(height: 20),
