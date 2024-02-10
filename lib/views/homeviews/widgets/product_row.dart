@@ -7,7 +7,7 @@ import 'shimmer_custom_Size.dart';
 
 class ProductsRow extends StatelessWidget {
   final String tittle;
-  final BestProductsState bestProductsState;
+  final dynamic bestProductsState;
 
   const ProductsRow(
       {super.key, required this.tittle, required this.bestProductsState});

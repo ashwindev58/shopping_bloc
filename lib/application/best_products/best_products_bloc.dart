@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:shopping_bloc/api_service/products/get_best_products.dart';
+import 'package:shopping_bloc/api_service/home/products/get_best_products.dart';
 
 import '../../models/product/model_product.dart';
 

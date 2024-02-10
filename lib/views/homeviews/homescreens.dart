@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_bloc/application/best_products/best_products_bloc.dart';
+import 'package:shopping_bloc/application/electronics/electronics_bloc.dart';
 import 'dart:developer';
 
 import '../../application/category/category_bloc_bloc.dart';
@@ -23,6 +24,11 @@ class MyHomePage extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       BlocProvider.of<BestProductsBloc>(context)
           .add(BestProductsEvent.getBestProducts());
+    });
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      BlocProvider.of<ElectronicsBloc>(context)
+          .add(const ElectronicsEvent.getElectronics());
     });
 
     return Scaffold(
@@ -63,12 +69,13 @@ class MyHomePage extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 20),
-              const ProductsRow(
-                tittle: "Best Quality",
-                bestProductsState: BestProductsState(
-                  isLoading: true,
-                  productList: [],
-                ),
+               BlocBuilder<ElectronicsBloc, ElectronicsState>(
+                builder: (context, state) {
+                  return  ProductsRow(
+                    tittle: "Electronics",
+                    bestProductsState: state,
+                  );
+                },
               ),
               const SizedBox(height: 20),
             ],

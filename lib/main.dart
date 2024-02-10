@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopping_bloc/api_service/home/electronics/getelectronics.dart';
 import 'package:shopping_bloc/application/best_products/best_products_bloc.dart';
+import 'package:shopping_bloc/application/electronics/electronics_bloc.dart';
 
 import 'application/category/category_bloc_bloc.dart';
 import 'views/landing/landing.dart';
@@ -23,6 +25,9 @@ class MyApp extends StatelessWidget {
           ),
            BlocProvider(
             create: (context) => BestProductsBloc(),
+          ),
+           BlocProvider(
+            create: (context) => ElectronicsBloc(),
           ),
           
         ],

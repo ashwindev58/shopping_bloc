@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import '../../models/product/model_product.dart';
+import '../../../models/product/model_product.dart';
 
 Future<List<ModelProductData>> fetchProductData() async {
   final response = await http.get(Uri.parse('https://fakestoreapi.com/products'));

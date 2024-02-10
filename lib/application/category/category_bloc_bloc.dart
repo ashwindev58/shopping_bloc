@@ -2,7 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../api_service/category/getcatgory.dart';
+import '../../api_service/home/category/getcatgory.dart';
+
+
 
 part 'category_bloc_bloc.freezed.dart';
 part 'category_bloc_event.dart';
