@@ -2,7 +2,10 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shopping_bloc/application/search_product/search_bloc_bloc.dart';
 
+import '../../application/Category/category_bloc_bloc.dart';
 import 'widget/widgetproductcard.dart';
 import 'widget/widgetqsearcharea.dart';
 
@@ -23,21 +26,13 @@ class ProductSearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      BlocProvider.of<SearchBlocBloc>(context)
+          .add(const SearchBlocEvent.searchProduct());
+    });
+
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text(
-      //     'Explore Products',
-      //     style: TextStyle(
-      //       fontWeight: FontWeight.bold,
-      //     ),
-      //   ),
-      //   actions: [
-      //     IconButton(
-      //       icon: const Icon(Icons.shopping_cart),
-      //       onPressed: () {},
-      //     ),
-      //   ],
-      // ),
       body: Column(
         children: [
           WidgetSearchArea(searchController: _searchController),
