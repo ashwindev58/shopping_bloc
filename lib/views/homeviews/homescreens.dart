@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shopping_bloc/application/bloc/category_bloc_bloc.dart';
+import 'package:shopping_bloc/application/best_products/best_products_bloc.dart';
 import 'dart:developer';
 
+import '../../application/category/category_bloc_bloc.dart';
 import 'widgets/discoverwidget.dart';
 import 'widgets/product_row.dart';
 import 'widgets/widgetcategories.dart';
@@ -18,6 +19,12 @@ class MyHomePage extends StatelessWidget {
       BlocProvider.of<CategoryBlocBloc>(context)
           .add(const CategoryBlocEvent.started());
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      BlocProvider.of<BestProductsBloc>(context)
+          .add(BestProductsEvent.getBestProducts());
+    });
+
     return Scaffold(
       body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
@@ -34,20 +41,35 @@ class MyHomePage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-               BlocBuilder<CategoryBlocBloc, CategoryBlocState>(
+              BlocBuilder<CategoryBlocBloc, CategoryBlocState>(
                 builder: (context, state) {
                   log(state.listCate.toString());
-                  
-                 return
-                    WidgetCategories(catList: state.listCate,);
+
+                  return WidgetCategories(
+                    catList: state.listCate,
+                  );
                 },
               ),
               const SizedBox(height: 20),
               const WidgetOfferCard(),
               const SizedBox(height: 20),
-              const ProductsRow(tittle: "Best Products"),
+              BlocBuilder<BestProductsBloc, BestProductsState>(
+                builder: (context, state) {
+                  log(state.toString());
+                  return ProductsRow(
+                    tittle: "Best Products",
+                    bestProductsState: state,
+                  );
+                },
+              ),
               const SizedBox(height: 20),
-              const ProductsRow(tittle: "Best Quality"),
+              const ProductsRow(
+                tittle: "Best Quality",
+                bestProductsState: BestProductsState(
+                  isLoading: true,
+                  productList: [],
+                ),
+              ),
               const SizedBox(height: 20),
             ],
           ),

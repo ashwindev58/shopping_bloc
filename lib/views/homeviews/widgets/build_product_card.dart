@@ -1,7 +1,8 @@
 
   import 'package:flutter/material.dart';
+import 'package:shopping_bloc/models/product/model_product.dart';
 
-Widget buildProductCard(String name, String description, String imgurl) {
+Widget buildProductCard({required ModelProductData data}) {
     return Container(
       width: 200,
       margin: const EdgeInsets.only(right: 16),
@@ -23,7 +24,7 @@ Widget buildProductCard(String name, String description, String imgurl) {
                   borderRadius:
                       const BorderRadius.vertical(top: Radius.circular(15)),
                   image: DecorationImage(
-                    image: NetworkImage(imgurl),
+                    image: NetworkImage(data.image),
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -34,7 +35,7 @@ Widget buildProductCard(String name, String description, String imgurl) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      name,
+                      data.title,maxLines: 1,
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -43,7 +44,7 @@ Widget buildProductCard(String name, String description, String imgurl) {
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      description,
+                      data.description,maxLines: 2,
                       style: const TextStyle(
                         fontSize: 12,
                         color: Colors.grey,

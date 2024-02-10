@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shopping_bloc/application/bloc/category_bloc_bloc.dart';
+import 'package:shopping_bloc/application/best_products/best_products_bloc.dart';
 
+import 'application/category/category_bloc_bloc.dart';
 import 'views/landing/landing.dart';
 
 void main() {
@@ -19,6 +20,9 @@ class MyApp extends StatelessWidget {
         providers: [
           BlocProvider(
             create: (context) => CategoryBlocBloc(),
+          ),
+           BlocProvider(
+            create: (context) => BestProductsBloc(),
           ),
           
         ],
