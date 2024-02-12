@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -11,31 +10,35 @@ class WidgetSearchArea extends StatelessWidget {
   const WidgetSearchArea({
     super.key,
     required TextEditingController searchController,
+    required this.currentCategory,
   }) : _searchController = searchController;
 
   final TextEditingController _searchController;
+  final String currentCategory;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(15),
       decoration: const BoxDecoration(
-        image: DecorationImage(image: AssetImage("images/disc.jpg"),fit: BoxFit.cover)
-      ),
+          image: DecorationImage(
+              image: AssetImage("images/disc.jpg"), fit: BoxFit.cover)),
       child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 12.0, sigmaY: 12.0),
+        filter: ImageFilter.blur(sigmaX: 12.0, sigmaY: 12.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const BackButtonWidget(),
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             const Text(
               'Find What You Need',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
-              ), 
+              ),
             ),
             const SizedBox(height: 10),
             TextField(
@@ -54,8 +57,12 @@ class WidgetSearchArea extends StatelessWidget {
                 ),
               ),
               onChanged: (value) {
-                 BlocProvider.of<SearchBlocBloc>(context)
-          .add( SearchBlocEvent.searchProduct(category: value,searchkey: value));
+                BlocProvider.of<SearchBlocBloc>(context).add(
+                  SearchBlocEvent.searchProduct(
+                    category: currentCategory,
+                    searchkey: value,
+                  ),
+                );
                 // Implement search functionality here
               },
             ),

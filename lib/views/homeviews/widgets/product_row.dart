@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_bloc/application/best_products/best_products_bloc.dart';
 
 import '../../../models/product/model_product.dart';
 import 'build_product_card.dart';

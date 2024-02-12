@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:shopping_bloc/style/colors.dart';
 
-import '../../product_list/common_product_lis.dart';
 import 'widgetcategrycard.dart';
 
 class WidgetCategories extends StatelessWidget {

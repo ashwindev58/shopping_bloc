@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_bloc/application/search_product/search_bloc_bloc.dart';
@@ -31,15 +30,16 @@ class ProductSearchScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          WidgetSearchArea(searchController: _searchController),
+          WidgetSearchArea(searchController: _searchController, currentCategory:currentCategory),
           BlocBuilder<SearchBlocBloc, SearchBlocState>(
             builder: (context, state) {
               log("---------------------------------- ${state.searchList}");
 
-              if(state.isLoading)
-              return const ShimerArea();
-              else
-              return ResultArea(products: state.searchList);
+              if(state.isLoading) {
+                return const ShimerArea();
+              } else {
+                return ResultArea(products: state.searchList);
+              }
             },
           ),
         ],
@@ -62,7 +62,7 @@ class ResultArea extends StatelessWidget {
       return  Column(
         children: [
           SizedBox(height: globalConstraints.maxWidth*0.2,),
-          Center(child: Text("No Result Found"),),
+          const Center(child: Text("No Result Found"),),
         ],
       );
     } else {

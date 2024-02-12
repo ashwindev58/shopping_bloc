@@ -6,9 +6,9 @@ import 'package:shopping_bloc/api_service/home/search_product/search_product.dar
 
 import '../../models/product/model_product.dart';
 
+part 'search_bloc_bloc.freezed.dart';
 part 'search_bloc_event.dart';
 part 'search_bloc_state.dart';
-part 'search_bloc_bloc.freezed.dart';
 
 class SearchBlocBloc extends Bloc<SearchBlocEvent, SearchBlocState> {
   SearchBlocBloc() : super(SearchBlocState.initial()) {
@@ -26,6 +26,17 @@ class SearchBlocBloc extends Bloc<SearchBlocEvent, SearchBlocState> {
          resp = await fetchcategoryProductData(category: event.category);
         log(resp.toString());
       }
+
+      List<ModelProductData> lst=resp;
+      List<ModelProductData> finallist=[];
+      for(var mod in lst){
+
+        if(mod.title.toLowerCase().contains(event.searchkey.toLowerCase())==true){
+         finallist.add(mod);
+        }
+      }
+
+      resp=finallist;
 
       emit(
         state.copyWith(isLoading: false, searchList: resp),
