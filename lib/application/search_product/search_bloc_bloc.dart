@@ -12,14 +12,24 @@ part 'search_bloc_bloc.freezed.dart';
 
 class SearchBlocBloc extends Bloc<SearchBlocEvent, SearchBlocState> {
   SearchBlocBloc() : super(SearchBlocState.initial()) {
-    on<_SearchProduct>((event, emit) {
+    on<_SearchProduct>((event, emit) async {
+      log("event : ${event.category} --- ${event.searchkey}");
 
-      emit(state.copyWith(isLoading: true,searchList: []),);
+      emit(
+        state.copyWith(isLoading: true, searchList: []),
+      );
+      late dynamic resp;
+      if (event.category == "all") {
+         resp = await fetchAllProductData();
+        log("event is alll $resp");
+      } else {
+         resp = await fetchcategoryProductData(category: event.category);
+        log(resp.toString());
+      }
 
-     var resp = fetchAllProductData();
-     log(resp.toString());
-     var resp2 = fetchcategoryProductData();
-     log(resp2.toString());
+      emit(
+        state.copyWith(isLoading: false, searchList: resp),
+      );
 
       // TODO: implement event handler
     });

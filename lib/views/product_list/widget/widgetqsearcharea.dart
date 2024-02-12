@@ -2,7 +2,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../application/search_product/search_bloc_bloc.dart';
 import 'widgetbackbutton.dart';
 
 class WidgetSearchArea extends StatelessWidget {
@@ -52,6 +54,8 @@ class WidgetSearchArea extends StatelessWidget {
                 ),
               ),
               onChanged: (value) {
+                 BlocProvider.of<SearchBlocBloc>(context)
+          .add( SearchBlocEvent.searchProduct(category: value,searchkey: value));
                 // Implement search functionality here
               },
             ),

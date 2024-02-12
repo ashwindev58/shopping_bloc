@@ -1,42 +1,47 @@
-import 'dart:ui';
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shopping_bloc/application/search_product/search_bloc_bloc.dart';
+import 'package:shopping_bloc/models/product/model_product.dart';
 
-import '../../application/Category/category_bloc_bloc.dart';
+import '../../main.dart';
+import 'widget/shimmmer_result_area.dart';
 import 'widget/widgetproductcard.dart';
 import 'widget/widgetqsearcharea.dart';
-
 
 class ProductSearchScreen extends StatelessWidget {
   final TextEditingController _searchController = TextEditingController();
 
-  final List<String> _products = [
-    'Product 1',
-    'Product 2',
-    'Product 3',
-    'Product 4',
-    'Product 5',
-    'Product 6',
-  ];
 
-  ProductSearchScreen({super.key});
+
+  final String currentCategory;
+
+  ProductSearchScreen({super.key, required this.currentCategory});
 
   @override
   Widget build(BuildContext context) {
-
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      BlocProvider.of<SearchBlocBloc>(context)
-          .add(const SearchBlocEvent.searchProduct());
+      BlocProvider.of<SearchBlocBloc>(context).add(
+          SearchBlocEvent.searchProduct(
+              category: currentCategory, searchkey: ""));
     });
 
     return Scaffold(
       body: Column(
         children: [
           WidgetSearchArea(searchController: _searchController),
-          ResultArea(products: _products),
+          BlocBuilder<SearchBlocBloc, SearchBlocState>(
+            builder: (context, state) {
+              log("---------------------------------- ${state.searchList}");
+
+              if(state.isLoading)
+              return const ShimerArea();
+              else
+              return ResultArea(products: state.searchList);
+            },
+          ),
         ],
       ),
     );
@@ -46,14 +51,22 @@ class ProductSearchScreen extends StatelessWidget {
 class ResultArea extends StatelessWidget {
   const ResultArea({
     super.key,
-    required List<String> products,
+    required List<ModelProductData> products,
   }) : _products = products;
 
-  final List<String> _products;
+  final List<ModelProductData> _products;
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    if(_products.isEmpty) {
+      return  Column(
+        children: [
+          SizedBox(height: globalConstraints.maxWidth*0.2,),
+          Center(child: Text("No Result Found"),),
+        ],
+      );
+    } else {
+      return Expanded(
       child: LayoutBuilder(
         builder: (context, constraints) {
           return GridView.builder(
@@ -65,11 +78,12 @@ class ResultArea extends StatelessWidget {
             ),
             itemCount: _products.length,
             itemBuilder: (context, index) {
-              return ProductCard(productName: _products[index]);
+              return ProductCard(data: _products[index]);
             },
           );
         },
       ),
     );
+    }
   }
 }

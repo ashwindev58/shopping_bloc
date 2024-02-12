@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:shopping_bloc/style/colors.dart';
 
+import '../../product_list/common_product_lis.dart';
 import 'widgetcategrycard.dart';
 
 class WidgetCategories extends StatelessWidget {
@@ -49,11 +50,12 @@ class WidgetCategories extends StatelessWidget {
               children: [
                 
                 for (int i = 0; i < catList.length; i++)
-                  buildCategoryCard(
-                    catList[i],
-                    Icons.phone_android,
-                    listColor[Random(i).nextInt(listColor.length)],
-                  ),
+                   buildCategoryCard(
+                      catList[i],
+                      Icons.phone_android,
+                      listColor[Random(i).nextInt(listColor.length)],
+                    ),
+                  
               ],
             ),
           ),

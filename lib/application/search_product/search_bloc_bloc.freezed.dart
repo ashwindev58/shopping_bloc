@@ -16,19 +16,21 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SearchBlocEvent {
+  String get searchkey => throw _privateConstructorUsedError;
+  String get category => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() searchProduct,
+    required TResult Function(String searchkey, String category) searchProduct,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? searchProduct,
+    TResult? Function(String searchkey, String category)? searchProduct,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? searchProduct,
+    TResult Function(String searchkey, String category)? searchProduct,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -48,6 +50,10 @@ mixin _$SearchBlocEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $SearchBlocEventCopyWith<SearchBlocEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -55,6 +61,8 @@ abstract class $SearchBlocEventCopyWith<$Res> {
   factory $SearchBlocEventCopyWith(
           SearchBlocEvent value, $Res Function(SearchBlocEvent) then) =
       _$SearchBlocEventCopyWithImpl<$Res, SearchBlocEvent>;
+  @useResult
+  $Res call({String searchkey, String category});
 }
 
 /// @nodoc
@@ -66,13 +74,35 @@ class _$SearchBlocEventCopyWithImpl<$Res, $Val extends SearchBlocEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? searchkey = null,
+    Object? category = null,
+  }) {
+    return _then(_value.copyWith(
+      searchkey: null == searchkey
+          ? _value.searchkey
+          : searchkey // ignore: cast_nullable_to_non_nullable
+              as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$SearchProductImplCopyWith<$Res> {
+abstract class _$$SearchProductImplCopyWith<$Res>
+    implements $SearchBlocEventCopyWith<$Res> {
   factory _$$SearchProductImplCopyWith(
           _$SearchProductImpl value, $Res Function(_$SearchProductImpl) then) =
       __$$SearchProductImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String searchkey, String category});
 }
 
 /// @nodoc
@@ -82,51 +112,85 @@ class __$$SearchProductImplCopyWithImpl<$Res>
   __$$SearchProductImplCopyWithImpl(
       _$SearchProductImpl _value, $Res Function(_$SearchProductImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? searchkey = null,
+    Object? category = null,
+  }) {
+    return _then(_$SearchProductImpl(
+      searchkey: null == searchkey
+          ? _value.searchkey
+          : searchkey // ignore: cast_nullable_to_non_nullable
+              as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$SearchProductImpl implements _SearchProduct {
-  const _$SearchProductImpl();
+  const _$SearchProductImpl({required this.searchkey, required this.category});
+
+  @override
+  final String searchkey;
+  @override
+  final String category;
 
   @override
   String toString() {
-    return 'SearchBlocEvent.searchProduct()';
+    return 'SearchBlocEvent.searchProduct(searchkey: $searchkey, category: $category)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SearchProductImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$SearchProductImpl &&
+            (identical(other.searchkey, searchkey) ||
+                other.searchkey == searchkey) &&
+            (identical(other.category, category) ||
+                other.category == category));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, searchkey, category);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SearchProductImplCopyWith<_$SearchProductImpl> get copyWith =>
+      __$$SearchProductImplCopyWithImpl<_$SearchProductImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() searchProduct,
+    required TResult Function(String searchkey, String category) searchProduct,
   }) {
-    return searchProduct();
+    return searchProduct(searchkey, category);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? searchProduct,
+    TResult? Function(String searchkey, String category)? searchProduct,
   }) {
-    return searchProduct?.call();
+    return searchProduct?.call(searchkey, category);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? searchProduct,
+    TResult Function(String searchkey, String category)? searchProduct,
     required TResult orElse(),
   }) {
     if (searchProduct != null) {
-      return searchProduct();
+      return searchProduct(searchkey, category);
     }
     return orElse();
   }
@@ -161,7 +225,18 @@ class _$SearchProductImpl implements _SearchProduct {
 }
 
 abstract class _SearchProduct implements SearchBlocEvent {
-  const factory _SearchProduct() = _$SearchProductImpl;
+  const factory _SearchProduct(
+      {required final String searchkey,
+      required final String category}) = _$SearchProductImpl;
+
+  @override
+  String get searchkey;
+  @override
+  String get category;
+  @override
+  @JsonKey(ignore: true)
+  _$$SearchProductImplCopyWith<_$SearchProductImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

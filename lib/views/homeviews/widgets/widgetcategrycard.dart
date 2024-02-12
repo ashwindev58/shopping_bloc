@@ -1,50 +1,69 @@
 
-  import 'package:flutter/material.dart';
+
+
+
+import 'dart:developer';
+
+import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../product_list/common_product_lis.dart';
+
+
 Widget buildCategoryCard(String title, IconData? icon, Color color) {
-    return Container(
-      
-      margin: const EdgeInsets.only(right: 16),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-        elevation: 3,
-        child: InkWell(
-          onTap: () {},
-          borderRadius: BorderRadius.circular(15),
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  title[0].toUpperCase(),
-                  style:  TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.w900,
-                    color: color,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 10),
-                Expanded(
-                  child: Text(
-                    title.toUpperCase(),maxLines: 1,
-                    style: const TextStyle(
-                      fontSize: 13,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+    return Builder(
+      builder: (context) {
+        return Container(
+          
+          margin: const EdgeInsets.only(right: 16),
+          child: Card(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            elevation: 3,
+            child: InkWell(
+              onTap: () {
+                 log("taaaaaaaaaaaaaaaaaaaapppppppppppppp");
+                       Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ProductSearchScreen(currentCategory:  title,),
                     ),
-                    textAlign: TextAlign.center,
-                  ),
+                  );
+              },
+              borderRadius: BorderRadius.circular(15),
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      title[0].toUpperCase(),
+                      style:  TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w900,
+                        color: color,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 10),
+                    Expanded(
+                      child: Text(
+                        title.toUpperCase(),maxLines: 1,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
-        ),
-      ),
+        );
+      }
     );
   }
 

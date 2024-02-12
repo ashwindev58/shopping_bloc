@@ -1,40 +1,42 @@
 
 import 'package:flutter/material.dart';
+import 'package:shopping_bloc/models/product/model_product.dart';
 
 class ProductCard extends StatelessWidget {
-  final String productName;
+  final ModelProductData data;
 
-  const ProductCard({super.key, required this.productName});
+  const ProductCard({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5,
-      margin: const EdgeInsets.all(10),
+      elevation: 5,color: Colors.white,surfaceTintColor: Colors.white,
+      margin: const EdgeInsets.all(10),shadowColor: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
+        children: [const SizedBox(height: 20,),
           Expanded(
             child: Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+              decoration:  BoxDecoration(
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
                 image: DecorationImage(
-                  image: AssetImage('images/dis.jpg'),
-                  fit: BoxFit.cover,
+                  image: NetworkImage(data.image),
+                  fit: BoxFit.contain,
                 ),
               ),
             ),
           ),
+          const SizedBox(height: 20,),
           Padding(
             padding: const EdgeInsets.all(10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  productName,
+                  data.title,maxLines: 1,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -52,24 +54,15 @@ class ProductCard extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      '\$199.99',
-                      style: TextStyle(
+                     Text(
+                      "₹ ${data.price}",
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                         color: Colors.blue,
                       ),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Add to Cart functionality
-                      },
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.blue,
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                      ),
-                      child: const Icon(Icons.shopping_cart),
-                    ),
+                    IconButton(onPressed: (){}, icon:  const Icon(Icons.shopping_cart),)
                   ],
                 ),
               ],

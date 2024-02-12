@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:http/http.dart' as http;
 
 import '../../../models/product/model_product.dart';
@@ -23,8 +24,8 @@ Future<List<ModelProductData>> fetchAllProductData() async {
   }
 }
 
-Future<List<ModelProductData>> fetchcategoryProductData() async {
-  final response = await http.get(Uri.parse('https://fakestoreapi.com/products/categories'));
+Future<List<ModelProductData>> fetchcategoryProductData({required String category}) async {
+  final response = await http.get(Uri.parse('https://fakestoreapi.com/products/category/$category'));
 
   if (response.statusCode == 200) {
     // Decode JSON response into a list of dynamic objects

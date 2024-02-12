@@ -25,7 +25,7 @@ class WidgetSearchExitButtons extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => ProductSearchScreen(),
+                      builder: (context) => ProductSearchScreen(currentCategory: "all"),
                     ),
                   );
                   //log("searched");
