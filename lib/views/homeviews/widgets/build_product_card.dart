@@ -1,8 +1,10 @@
-
-  import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:shopping_bloc/models/product/model_product.dart';
 
+import '../../productview/productviewscreen.dart';
+
 Widget buildProductCard({required ModelProductData data}) {
+  return Builder(builder: (context) {
     return Container(
       width: 200,
       margin: const EdgeInsets.only(right: 16),
@@ -12,7 +14,12 @@ Widget buildProductCard({required ModelProductData data}) {
         ),
         elevation: 3,
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: ((context) => ProductViewScreen(
+                      product: data,
+                    ))));
+          },
           borderRadius: BorderRadius.circular(15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +42,8 @@ Widget buildProductCard({required ModelProductData data}) {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      data.title,maxLines: 1,
+                      data.title,
+                      maxLines: 1,
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -44,7 +52,8 @@ Widget buildProductCard({required ModelProductData data}) {
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      data.description,maxLines: 2,
+                      data.description,
+                      maxLines: 2,
                       style: const TextStyle(
                         fontSize: 12,
                         color: Colors.grey,
@@ -58,4 +67,5 @@ Widget buildProductCard({required ModelProductData data}) {
         ),
       ),
     );
-  }
+  });
+}

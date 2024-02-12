@@ -24,12 +24,12 @@ class MyHomePage extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       BlocProvider.of<BestProductsBloc>(context)
           .add(BestProductsEvent.getBestProducts());
-    });
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      BlocProvider.of<ElectronicsBloc>(context)
+          BlocProvider.of<ElectronicsBloc>(context)
           .add(const ElectronicsEvent.getElectronics());
     });
+
+   
 
     return Scaffold(
       body: LayoutBuilder(
